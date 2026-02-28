@@ -1,0 +1,13 @@
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  background: #171717;
+  color: #eaf0ff;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+.content { padding: 24px; }

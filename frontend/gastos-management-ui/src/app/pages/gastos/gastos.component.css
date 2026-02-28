@@ -1,0 +1,317 @@
+/* ========================= 
+   Página
+========================= */
+.gastos-page { padding: 24px; }
+
+.card{
+  background: rgba(255,255,255,0.03);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.25);
+}
+
+/* =========================
+   Header
+========================= */
+.card-header{
+  display:flex;
+  align-items:flex-start;
+  justify-content:space-between;
+  gap:16px;
+  padding:16px 18px;
+  border-bottom:1px solid rgba(255,255,255,0.08);
+}
+
+.card-title{
+  font-weight:800;
+  color:#eaf0ff;
+  letter-spacing:.2px;
+  font-size:18px;
+}
+.card-meta{ color:#a1a1a1ef; font-size:13px; margin-top:4px; }
+
+.kpis{
+  display:flex;
+  gap:10px;
+  flex-wrap:wrap;
+}
+.kpi{
+  padding:10px 12px;
+  border-radius:12px;
+  border:1px solid rgba(255,255,255,0.10);
+  background: rgba(255,255,255,0.03);
+  min-width: 160px;
+}
+.kpi-label{ font-size:12px; color: rgba(170,181,214,.85); }
+.kpi-value{ font-weight:800; color:#eaf0ff; margin-top:4px; }
+
+/* =========================
+   Tabs
+========================= */
+.tabs{
+  display:flex;
+  gap:10px;
+  flex-wrap:wrap;
+  padding:12px 16px;
+  border-top:1px solid rgba(255,255,255,0.06);
+  border-bottom:1px solid rgba(255,255,255,0.06);
+  background: rgba(255,255,255,0.01);
+}
+
+.tab{
+  display:inline-flex;
+  align-items:center;
+  gap:6px;
+  padding:9px 14px;
+  border-radius:12px;
+  border:1px solid rgba(255,255,255,0.12);
+  background: rgba(255,255,255,0.03);
+  color:#d7e3ff;
+  font-size:13px;
+  cursor:pointer;
+  transition: transform .08s ease, background .15s ease, border-color .15s ease;
+}
+.tab:hover{ transform: translateY(-1px); border-color: rgba(255,255,255,0.18); }
+.tab.active{
+  background: rgba(234,234,234,0.18);
+  border-color: rgba(0,0,0,0.45);
+}
+
+/* =========================
+   Body
+========================= */
+.card-body{ padding: 16px 18px 20px; }
+
+/* =========================
+   Toolbar filtros
+========================= */
+.toolbar{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:12px;
+  margin: 10px 0 14px;
+  flex-wrap: wrap;
+}
+
+.filters{
+  display:flex;
+  gap:10px;
+  align-items:center;
+  flex-wrap: wrap;
+  padding:10px 12px;
+  border-radius:12px;
+  background: rgba(255,255,255,0.04);
+  border:1px solid rgba(255,255,255,0.08);
+}
+
+.filters .input{ width: 260px; }
+.filters select.input{ width: 220px; }
+
+/* =========================
+   Tabla (✅ PROPORCIONAL REAL)
+========================= */
+.table-wrap{
+  overflow:auto;
+  border-radius:12px;
+  border:1px solid rgba(255,255,255,0.06);
+}
+
+/* OJO: quitar min-width gigante que te infla columnas */
+.table{
+  width:100%;
+  border-collapse: separate; /* ✅ permite que el padding se perciba igual */
+  border-spacing: 0;         /* ✅ sin espacios extra raros */
+  table-layout: fixed;
+  background: rgba(0,0,0,0.10);
+}
+
+/* celdas */
+/* ✅ mismo espacio entre columnas = mismo padding en TODAS las celdas */
+.table th, .table td{
+  padding: 12px 16px;        /* 🔥 aquí está el “gap” visual */
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+  color:#d7e3ff;
+  vertical-align: middle;
+  text-align: left;          /* ✅ TODO a la izquierda */
+}
+
+.table th{
+  color:#aab5d6;
+  font-weight:800;
+  background: rgba(255,255,255,0.02);
+}
+
+/* ✅ anchos estables (ajústalos si quieres) */
+.col-desc    { width: 28ch; }
+.col-monto   { width: 12ch; }
+.col-cat     { width: 16ch; }
+.col-fecha   { width: 20ch; }
+.col-actions { width: 18ch; }
+
+/* ✅ descripción con ellipsis */
+.table th:first-child,
+.table td:first-child{
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* ✅ MONTO: quitar derecha, dejar izquierda como todos */
+.table th.th-monto,
+.table td.td-monto{
+  text-align: left !important;
+  padding-right: 16px; /* igual que todos */
+  white-space: nowrap;
+  font-variant-numeric: tabular-nums;
+}
+
+/* ✅ Acciones */
+.actions{ white-space: nowrap; }
+td.actions .btn{ margin-right: 8px; }
+td.actions .btn:last-child{ margin-right: 0; }
+
+
+
+.mono{
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,"Liberation Mono","Courier New", monospace;
+}
+
+.empty{
+  padding:22px 12px;
+  text-align:center;
+  color:#aab5d6;
+}
+
+.sortable{ cursor:pointer; user-select:none; }
+.sort-ind{ margin-left:8px; opacity:.8; }
+
+/* =========================
+   Total bar
+========================= */
+.total-bar{
+  display:flex;
+  justify-content:flex-end;
+  gap:12px;
+  margin-top: 12px;
+  padding: 10px 12px;
+  border-radius: 12px;
+  border: 1px solid rgba(255,255,255,0.08);
+  background: rgba(255,255,255,0.03);
+}
+.total-label{ color: rgba(170,181,214,.9); }
+.total-value{ font-weight:900; color:#eaf0ff; }
+
+/* =========================
+   Inputs / Selects
+========================= */
+.input{
+  width:100%;
+  height:40px;
+  padding: 0 12px;
+  border-radius:12px;
+  border:1px solid rgba(255,255,255,0.12);
+  background: rgba(8,12,20,0.55);
+  color:#eaf0ff;
+  font-size:14px;
+  outline:none;
+  transition: border-color .15s ease, box-shadow .15s ease, background .15s ease;
+}
+.input::placeholder{ color: rgba(234,240,255,0.45); }
+.input:focus{
+  border-color: rgba(91,119,255,0.55);
+  box-shadow: 0 0 0 3px rgba(91,119,255,0.18);
+  background: rgba(8,12,20,0.70);
+}
+
+select.input{
+  appearance:none;
+  -webkit-appearance:none;
+  -moz-appearance:none;
+  background-image:
+    linear-gradient(45deg, transparent 50%, rgba(234,240,255,.7) 50%),
+    linear-gradient(135deg, rgba(234,240,255,.7) 50%, transparent 50%);
+  background-position: calc(100% - 18px) 50%, calc(100% - 12px) 50%;
+  background-size: 6px 6px, 6px 6px;
+  background-repeat:no-repeat;
+  padding-right:34px;
+}
+
+/* =========================
+   Botones
+========================= */
+.btn{
+  padding: 9px 12px;
+  border-radius: 12px;
+  border:1px solid rgba(255,255,255,0.12);
+  background: rgba(255,255,255,0.03);
+  color:#eaf0ff;
+  cursor:pointer;
+  transition: transform .08s ease, background .15s ease, border-color .15s ease;
+}
+.btn:hover{ transform: translateY(-1px); border-color: rgba(255,255,255,0.18); }
+.btn:disabled{ opacity:.5; cursor:not-allowed; transform:none; }
+
+.btn-ghost{ background: transparent; border-color: rgba(255,255,255,0.12); color:#cfe0ff; }
+.btn-danger{ border-color: rgba(255,99,99,0.35); background: rgba(255,99,99,0.12); }
+.btn-primary{ border-color: rgba(91,119,255,0.40); background: rgba(91,119,255,0.18); }
+
+/* =========================
+   Formulario (Registro)
+========================= */
+.form{
+  margin-top: 14px;
+  max-width: 640px;
+  display:grid;
+  gap:14px;
+  padding:14px;
+  border-radius:14px;
+  border:1px solid rgba(255,255,255,0.06);
+  background: rgba(0,0,0,0.10);
+}
+.form-row{ display:grid; gap:8px; }
+.label{ font-size:12px; color: rgba(234,240,255,0.80); letter-spacing:.3px; }
+.hint{ font-size:12px; color: rgba(170,181,214,0.85); margin-top:-2px; }
+
+.form-actions{ display:flex; gap:10px; margin-top:6px; }
+
+/* =========================
+   Mensajes
+========================= */
+.msg{
+  padding: 10px 12px;
+  border-radius: 14px;
+  font-size: 13px;
+  border: 1px solid rgba(255,255,255,0.10);
+  background: rgba(255,255,255,0.03);
+}
+.msg.error{ border-color: rgba(255,99,99,0.35); background: rgba(255,99,99,0.10); }
+
+.success-snackbar {
+  background: #1f3d2b !important;
+  color: #00ff99 !important;
+  border: 1px solid rgba(0,255,150,0.3);
+}
+
+/* =========================
+   Paginación
+========================= */
+.pagination{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  margin-top:12px;
+}
+.pagination-info{ opacity:.85; }
+
+/* =========================
+   Responsive
+========================= */
+@media (max-width: 900px){
+  .gastos-page{ padding: 14px; }
+  .card-header{ flex-direction: column; align-items: stretch; }
+  .filters{ width:100%; }
+  .filters .input, .filters select.input{ width: 100%; }
+  .form{ max-width: 100%; }
+}

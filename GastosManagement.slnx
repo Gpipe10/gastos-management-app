@@ -1,0 +1,6 @@
+<Solution>
+  <Project Path="backend/GastosManagement.Api/GastosManagement.Api.csproj" />
+  <Project Path="backend/GastosManagement.Application/GastosManagement.Application.csproj" />
+  <Project Path="backend/GastosManagement.Domain/GastosManagement.Domain.csproj" />
+  <Project Path="backend/GastosManagement.Infrastructure/GastosManagement.Infrastructure.csproj" />
+</Solution>

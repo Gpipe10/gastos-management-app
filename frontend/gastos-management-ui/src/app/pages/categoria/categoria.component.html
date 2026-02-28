@@ -1,0 +1,65 @@
+<div class="categoria-page">
+  <div class="card">
+
+    <div class="card-header">
+      <div>
+        <div class="card-title">Categorías</div>
+        <div class="card-meta">Crea y gestiona tus categorías</div>
+      </div>
+    </div>
+
+    <div class="card-body">
+
+      <div class="cat-grid">
+        <div class="cat-create">
+          <div class="label">Nueva categoría</div>
+
+          <div class="row">
+            <input
+              class="input"
+              type="text"
+              placeholder="Ej: Alimentación, Transporte…"
+              [(ngModel)]="categoriaNombre"
+            />
+
+            <button
+              class="btn btn-primary"
+              type="button"
+              (click)="crearCategoria()"
+              [disabled]="submitting || !categoriaNombre.trim()"
+            >
+              {{ submitting ? 'Creando…' : 'Crear' }}
+            </button>
+          </div>
+
+          <div class="hint">Luego podrás asignarlas a tus gastos.</div>
+
+          <div class="msg error" *ngIf="errorMessage">{{ errorMessage }}</div>
+          <div class="msg ok" *ngIf="successMessage">{{ successMessage }}</div>
+        </div>
+
+        <div class="cat-list">
+          <div class="label">Listado</div>
+
+          <!-- Estado cargando -->
+          <div class="empty small" *ngIf="loading">Cargando…</div>
+
+          <!-- Listado solo cuando ya NO está cargando -->
+          <ng-container *ngIf="!loading">
+
+            <div class="pill" *ngFor="let c of categorias">
+              <span>{{ c.nombre }}</span>
+              <button class="pill-x" type="button" (click)="eliminarCategoria(c.id)">✕</button>
+            </div>
+
+            <div class="empty small" *ngIf="categorias.length === 0">
+              Aún no hay categorías.
+            </div>
+
+          </ng-container>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>

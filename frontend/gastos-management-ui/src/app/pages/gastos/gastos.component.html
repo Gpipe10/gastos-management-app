@@ -1,0 +1,210 @@
+<div class="gastos-page">
+  <div class="card">
+
+    <!-- HEADER -->
+    <div class="card-header">
+      <div>
+        <div class="card-title">Gastos</div>
+        <div class="card-meta">Registro y gestión de gastos mensuales</div>
+      </div>
+
+      <!-- KPIs -->
+      <div class="kpis" *ngIf="view === 'LISTA'">
+        <div class="kpi">
+          <div class="kpi-label">Total gastos</div>
+          <div class="kpi-value mono">$ {{ totalBackend | number:'1.0-0' }}</div>
+        </div>
+        <div class="kpi">
+          <div class="kpi-label">Registros</div>
+          <div class="kpi-value mono">{{ visibleGastos.length }}</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- TABS -->
+    <div class="tabs">
+      <button class="tab" type="button" (click)="view='REGISTRO'" [class.active]="view==='REGISTRO'">
+        Registrar gasto
+      </button>
+
+      <button class="tab" type="button" (click)="view='LISTA'" [class.active]="view==='LISTA'">
+        Listado
+      </button>
+    </div>
+
+    <div class="card-body">
+
+      <!-- =======================
+           VISTA LISTA
+      ======================== -->
+      <div *ngIf="view === 'LISTA'">
+
+        <div class="toolbar">
+          <div class="filters">
+            <input
+              class="input"
+              type="text"
+              placeholder="Buscar por descripción…"
+              [(ngModel)]="filtroTexto"
+            />
+
+            <select class="input" [(ngModel)]="filtroCategoriaId">
+              <option value="">Todas las categorías</option>
+              <option *ngFor="let c of categorias" [value]="c.id">{{ c.nombre }}</option>
+            </select>
+
+            <button class="btn btn-ghost" type="button" (click)="limpiarFiltros()"
+              [disabled]="!filtroTexto && !filtroCategoriaId">
+              Limpiar
+            </button>
+          </div>
+
+          <button class="btn btn-primary" type="button" (click)="view='REGISTRO'">
+            + Nuevo gasto
+          </button>
+        </div>
+
+        <div class="table-wrap">
+          <table class="table">
+            <!-- ✅ colgroup: alinea columnas PERFECTO -->
+            <colgroup>
+              <col class="col-desc">
+              <col class="col-monto">
+              <col class="col-cat">
+              <col class="col-fecha">
+              <col class="col-actions">
+            </colgroup>
+
+            <thead>
+              <tr>
+                <th class="sortable" (click)="sortBy('descripcion')">
+                  Descripción
+                  <span class="sort-ind" *ngIf="sortField==='descripcion'">
+                    {{ sortDir === 'asc' ? '▲' : '▼' }}
+                  </span>
+                </th>
+
+                <th class="sortable th-monto" (click)="sortBy('monto')">
+                  Monto
+                  <span class="sort-ind" *ngIf="sortField==='monto'">
+                    {{ sortDir === 'asc' ? '▲' : '▼' }}
+                  </span>
+                </th>
+
+                <th class="sortable" (click)="sortBy('categoria')">
+                  Categoría
+                  <span class="sort-ind" *ngIf="sortField==='categoria'">
+                    {{ sortDir === 'asc' ? '▲' : '▼' }}
+                  </span>
+                </th>
+
+                <th class="sortable" (click)="sortBy('fechaHora')">
+                  Fecha y Hora
+                  <span class="sort-ind" *ngIf="sortField==='fechaHora'">
+                    {{ sortDir === 'asc' ? '▲' : '▼' }}
+                  </span>
+                </th>
+
+                <th class="actions">Acciones</th>
+              </tr>
+            </thead>
+
+            <tbody>
+              <tr *ngFor="let g of pagedGastos">
+                <td>{{ g.descripcion }}</td>
+
+                <!-- ✅ monto alineado fijo -->
+                <td class="td-monto mono">$ {{ g.monto | number:'1.0-0' }}</td>
+
+                <td>{{ g.categoriaNombre || '-' }}</td>
+                <td class="mono">{{ g.fechaHora | date:'yyyy-MM-dd HH:mm' }}</td>
+
+                <td class="actions">
+                  <button class="btn btn-ghost" type="button" (click)="editarGasto(g)">Editar</button>
+                  <button class="btn btn-danger" type="button" (click)="eliminarGasto(g.id)">Eliminar</button>
+                </td>
+              </tr>
+
+              <tr *ngIf="loading">
+                <td colspan="5" class="empty">Cargando…</td>
+              </tr>
+
+              <tr *ngIf="!loading && visibleGastos.length === 0">
+                <td colspan="5" class="empty">No hay gastos para mostrar.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="pagination" *ngIf="!loading && visibleGastos.length > 0">
+          <button class="btn btn-ghost" type="button"
+                  (click)="prevPage()"
+                  [disabled]="currentPage === 1">
+            Anterior
+          </button>
+
+          <div class="pagination-info mono">
+            Página {{ currentPage }} de {{ totalPages }}
+          </div>
+
+          <button class="btn btn-ghost" type="button"
+                  (click)="nextPage()"
+                  [disabled]="currentPage === totalPages">
+            Siguiente
+          </button>
+        </div>
+
+        <!-- Footer total -->
+        <div class="total-bar">
+          <div class="total-label">Total</div>
+          <div class="total-value mono">$ {{ totalBackend | number:'1.0-0' }}</div>
+        </div>
+      </div>
+
+      <!-- =======================
+           VISTA REGISTRO (CREATE / UPDATE)
+      ======================== -->
+      <div *ngIf="view === 'REGISTRO'">
+        <div class="card-title">Registrar / Editar gasto</div>
+        <div class="card-meta">Descripción, monto, fecha y categoría.</div>
+
+        <div class="form">
+          <div class="form-row">
+            <label class="label">Descripción *</label>
+            <input class="input" type="text" placeholder="Ej: Mercado, arriendo, transporte…"
+              [(ngModel)]="form.descripcion" />
+          </div>
+
+          <div class="form-row">
+            <label class="label">Monto *</label>
+            <input class="input" type="number" min="1" step="1" placeholder="Ej: 35000"
+              [(ngModel)]="form.monto" />
+            <div class="hint">Debe ser un número positivo (mayor a 0).</div>
+          </div>
+
+          <div class="form-row">
+            <label class="label">Categoría *</label>
+            <select class="input" [(ngModel)]="form.categoriaId">
+              <option value="" disabled>Selecciona…</option>
+              <option *ngFor="let c of categorias" [value]="c.id">{{ c.nombre }}</option>
+            </select>
+            <div class="hint">
+              ¿No existe? Créala en el módulo “Categoría” del menú lateral.
+            </div>
+          </div>
+
+          <div class="msg error" *ngIf="errorMessage">{{ errorMessage }}</div>
+
+          <div class="form-actions">
+            <button class="btn btn-ghost" type="button" (click)="view='LISTA'">Volver</button>
+
+            <button class="btn btn-primary" type="button" (click)="guardarGasto()" [disabled]="submitting">
+              {{ submitting ? 'Guardando…' : (form.id ? 'Actualizar' : 'Registrar') }}
+            </button>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>

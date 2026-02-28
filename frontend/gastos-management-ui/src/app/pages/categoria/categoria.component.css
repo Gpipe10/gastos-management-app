@@ -1,0 +1,122 @@
+.categoria-page { padding: 24px; }
+
+.card{
+  background: rgba(255,255,255,0.03);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.25);
+}
+
+.card-header{
+  display:flex;
+  align-items:flex-start;
+  justify-content:space-between;
+  gap:16px;
+  padding:16px 18px;
+  border-bottom:1px solid rgba(255,255,255,0.08);
+}
+
+.card-title{
+  font-weight:800;
+  color:#eaf0ff;
+  letter-spacing:.2px;
+  font-size:18px;
+}
+
+.card-meta{ color:#a1a1a1ef; font-size:13px; margin-top:4px; }
+
+.card-body{ padding: 16px 18px 20px; }
+
+.input{
+  width:100%;
+  height:40px;
+  padding: 0 12px;
+  border-radius:12px;
+  border:1px solid rgba(255,255,255,0.12);
+  background: rgba(8,12,20,0.55);
+  color:#eaf0ff;
+  font-size:14px;
+  outline:none;
+}
+
+.btn{
+  padding: 9px 12px;
+  border-radius: 12px;
+  border:1px solid rgba(255,255,255,0.12);
+  background: rgba(255,255,255,0.03);
+  color:#eaf0ff;
+  cursor:pointer;
+}
+.btn:disabled{ opacity:.55; cursor:not-allowed; }
+
+.btn-primary{
+  border-color: rgba(91,119,255,0.40);
+  background: rgba(91,119,255,0.18);
+}
+
+.label{ font-size:12px; color: rgba(234,240,255,0.80); letter-spacing:.3px; }
+.hint{ font-size:12px; color: rgba(170,181,214,0.85); margin-top:8px; }
+
+.msg{
+  margin-top: 10px;
+  padding: 10px 12px;
+  border-radius: 14px;
+  font-size: 13px;
+  border: 1px solid rgba(255,255,255,0.10);
+  background: rgba(255,255,255,0.03);
+}
+.msg.error{ border-color: rgba(255,99,99,0.35); background: rgba(255,99,99,0.10); }
+.msg.ok{ border-color: rgba(0,255,150,0.25); background: rgba(0,255,150,0.08); }
+
+.cat-grid{
+  display:grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+  margin-top: 12px;
+}
+
+.cat-create, .cat-list{
+  padding:14px;
+  border-radius:14px;
+  border:1px solid rgba(255,255,255,0.06);
+  background: rgba(0,0,0,0.10);
+}
+
+.cat-create .row{
+  display:flex;
+  gap:10px;
+  margin-top:10px;
+}
+
+.pill{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:10px;
+  padding:10px 12px;
+  border-radius:999px;
+  border:1px solid rgba(255,255,255,0.10);
+  background: rgba(255,255,255,0.03);
+  margin-top:10px;
+}
+
+.pill-x{
+  border:none;
+  background:transparent;
+  color: rgba(255,160,160,.9);
+  cursor:pointer;
+  font-size: 14px;
+}
+
+.empty{
+  padding:22px 12px;
+  text-align:center;
+  color:#aab5d6;
+}
+.empty.small{ padding:10px 0; font-size:13px; }
+
+@media (max-width: 900px){
+  .categoria-page{ padding: 14px; }
+  .cat-grid{ grid-template-columns: 1fr; }
+}
