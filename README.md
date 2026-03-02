@@ -18,9 +18,15 @@ Para ejecutar el proyecto se necesita:
 - Node.js 18+ y npm  
 - SQL Server (LocalDB, Express o Developer)  
 
-No es obligatorio usar Visual Studio. Puede ejecutarse desde consola.
+Verificar que esten los requisitos corerctamente instalados valda en cmd win:
 
-Si el comando `dotnet` no se reconoce, agregar `C:\Program Files\dotnet\` a la variable de entorno PATH y reiniciar la terminal.
+git --version
+dotnet --version
+node --version
+npm --version
+
+
+Si el comando `dotnet` no se reconoce, asegúrate de que la herramienta `dotnet` esté instalada y que la ruta `C:\Program Files\dotnet\` esté agregada a la variable de entorno **PATH**. Luego reinicia la terminal.
 
 ---
 
@@ -30,6 +36,7 @@ git clone https://github.com/Gpipe10/gastos-management-app.git
 cd gastos-management-app  
 
 ---
+## Configuración de Puerto 
 
 ## Configuración de Base de Datos
 
@@ -37,7 +44,7 @@ Editar el archivo:
 
 backend/GastosManagement.Api/appsettings.Development.json  
 
-Agregar o configurar la sección:
+Agregar o configurar la sección antes de :  
 
 ### Opción LocalDB
 
@@ -62,9 +69,12 @@ Restaurar dependencias:
 dotnet restore .\backend\GastosManagement.Infrastructure\GastosManagement.Infrastructure.csproj  
 dotnet restore .\backend\GastosManagement.Api\GastosManagement.Api.csproj  
 
-Si la herramienta EF no está instalada:
+Instalar la herramienta EF :
 
 dotnet tool install --global dotnet-ef  
+
+Si el comando `dotnet ef` no se reconoce, asegúrate de que la herramienta `dotnet-ef` esté instalada y que la ruta `C:\Users\TU_USUARIO\.dotnet\tools` esté agregada a la variable de entorno **PATH**. Luego reinicia la terminal.
+
 
 Aplicar migraciones:
 
@@ -82,7 +92,8 @@ dotnet run --project .\backend\GastosManagement.Api
 
 Swagger estará disponible en:
 
-https://localhost:XXXX/swagger  
+https://localhost:7001/swagger/index.html
+http://localhost:5000/swagger/index.html
 
 (El puerto exacto se mostrará en la consola)
 
