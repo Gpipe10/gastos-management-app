@@ -21,8 +21,11 @@ Para ejecutar el proyecto se necesita:
 Verificar que esten los requisitos corerctamente instalados valda en cmd win:
 
 git --version
+
 dotnet --version
+
 node --version
+
 npm --version
 
 
