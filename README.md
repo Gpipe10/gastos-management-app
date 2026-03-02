@@ -96,6 +96,7 @@ dotnet run --project .\backend\GastosManagement.Api
 Swagger estará disponible en:
 
 https://localhost:7001/swagger/index.html
+
 http://localhost:5000/swagger/index.html
 
 (El puerto exacto se mostrará en la consola)
